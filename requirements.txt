@@ -29,7 +29,6 @@ typed-ast==1.4.2
 typing-extensions==3.7.4.3
 Werkzeug==1.0.1
 ariadne
-typing-extensions
 starlette
 graphql-core
 uwsgi
