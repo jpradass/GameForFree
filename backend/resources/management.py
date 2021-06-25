@@ -1,14 +1,11 @@
-from flask_restful import Resource
 from ..version import version
+#from version import version
 
-class Health(Resource):
-    def get(self):
-        return {'Status': 'OK'}, 200
+def health():
+    return {'Status': 'OK'}
 
-class Version(Resource):
-    def get(self):
-        return {'Version': f'v{version}'}, 200
+def server_version():
+    return {'Version': f'v{version}'}
 
-class Refresh(Resource):
-    def put(self):
-        return {}, 202
+def refresh():
+    pass

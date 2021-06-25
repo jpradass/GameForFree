@@ -1,0 +1,35 @@
+type Game {
+    id: ID!
+    title: String!
+    worth: String
+    thumbnail: String
+    image: String
+    description: String
+    instructions: String
+    open_giveaway_url: String
+    published_date: String
+    type: String
+    platforms: String
+    end_date: String
+    users: Int
+    status: String
+    gamerpower_url: String
+    open_giveaway: String
+}
+
+type GameResult {
+    success: Boolean!
+    errors: [String]
+    game: Game
+}
+
+type GamesResult {
+    success: Boolean!
+    errors: [String]
+    games: [Game]
+}
+
+type Query {
+    games: GamesResult!
+    game(gameId: ID!): GameResult!
+}
