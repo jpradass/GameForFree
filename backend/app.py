@@ -60,7 +60,7 @@ def server_v():
 
 @app.route("/refresh", methods=["PUT"])
 def refresh_games():
-    return jsonify({"Games list refreshed?", refresh()}), 200
+    return jsonify(games_list_refreshed=refresh()), 200
 
 if __name__ == "__main__":
 
