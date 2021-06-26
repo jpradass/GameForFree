@@ -1,10 +1,11 @@
+from typing import Dict
 from ariadne.utils import convert_kwargs_to_snake_case
 from ..models.games import Game
 # from models.games import Game
 
-def resolve_games(obj, info):
+def resolve_games(obj, info) -> Dict[str, any]:
     try:
-        games = [game.to_dict() for game in Game.query.all()]
+        games = [game.to_dict() for game in Game.find_all()]
         payload = {
             "success": True,
             "games": games
@@ -17,9 +18,9 @@ def resolve_games(obj, info):
     return payload
 
 @convert_kwargs_to_snake_case
-def resolve_game(obj, info, game_id):
+def resolve_game(obj, info, game_id) -> Dict[str, any]:
     try:
-        game = Game.query.get(game_id)
+        game = Game.findby_id(game_id)
         payload = {
             "success": True,
             "game": game.to_dict()

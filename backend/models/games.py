@@ -1,4 +1,4 @@
-from typing import Any, Dict
+from typing import Any, Dict, List
 from ..db import db
 # from db import db
 
@@ -66,3 +66,20 @@ class Game(db.Model):
     def saveto_db(self) -> None:
         db.session.add(self)
         db.session.commit()
+
+    def deletefrom_db(self) -> None:
+        db.session.delete(self)
+        db.session.commit()
+
+    @classmethod
+    def findby_title(cls, title) -> "Game":
+        return cls.query.filter_by(title=title).first()
+
+    @classmethod
+    def findby_id(cls, id) -> "Game":
+        return cls.query.filter_by(id=id).first()
+
+    @classmethod
+    def find_all(cls) -> List["Game"]:
+        return cls.query.all()
+    

@@ -20,8 +20,10 @@ def refresh() -> bool:
 
     try:
         for game in games:
-            Game(**game).saveto_db()
+            if not Game.findby_title(game["title"]):
+                Game(**game).saveto_db()
         
+        # TODO faltaría meterle que revisara todos los titulos que los end.date ya hubieran pasado para eliminarlos de la db.
         return True
     except Exception as e:
         print(e.__str__())
