@@ -1,9 +1,10 @@
 from ariadne.utils import convert_kwargs_to_snake_case
 from ..models.games import Game
+# from models.games import Game
 
 def resolve_games(obj, info):
     try:
-        games = [game.to_dict for game in Game.query.all()]
+        games = [game.to_dict() for game in Game.query.all()]
         payload = {
             "success": True,
             "games": games

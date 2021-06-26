@@ -25,6 +25,7 @@ query = ObjectType("Query")
 query.set_field("games", resolve_games)
 query.set_field("game", resolve_game)
 type_defs = load_schema_from_path("backend/schemas/schema.graphql")
+# type_defs = load_schema_from_path("schemas/schema.graphql")
 schema = make_executable_schema(type_defs, query, snake_case_fallback_resolvers)
 
 @app.before_first_request
@@ -56,6 +57,10 @@ def server_health():
 @app.route("/version", methods=["GET"])
 def server_v():
     return jsonify(server_version()), 200
+
+@app.route("/refresh", methods=["PUT"])
+def refresh_games():
+    return jsonify({"Games list refreshed?", refresh()}), 200
 
 if __name__ == "__main__":
 

@@ -1,6 +1,10 @@
+from typing import Any, Dict
 from ..db import db
+# from db import db
 
 class Game(db.Model):
+    __tablename__ = "game"
+
     id = db.Column(db.Integer, primary_key=True)
     title = db.Column(db.String)
     worth = db.Column(db.String)
@@ -18,7 +22,25 @@ class Game(db.Model):
     gamerpower_url = db.Column(db.String)
     open_giveaway = db.Column(db.String)
 
-    def to_dict(self):
+    def __init__(self, *args, **kwargs) -> None:
+        self.id = kwargs.get("id")
+        self.title = kwargs.get("title")
+        self.worth = kwargs.get("worth")
+        self.thumbnail = kwargs.get("thumbnail")
+        self.image = kwargs.get("image")
+        self.description = kwargs.get("description")
+        self.instructions = kwargs.get("instructions")
+        self.open_giveaway_url = kwargs.get("open_giveaway_url")
+        self.published_date = kwargs.get("published_date")
+        self.type = kwargs.get("type")
+        self.platforms = kwargs.get("platforms")
+        self.end_date = kwargs.get("end_date")
+        self.users = kwargs.get("users")
+        self.status = kwargs.get("status")
+        self.gamerpower_url = kwargs.get("gamerpower_url")
+        self.open_giveaway = kwargs.get("open_giveaway")
+    
+    def to_dict(self) -> Dict[str, Any]:
         return {
             "id": self.id,
             "title": self.title,
@@ -37,3 +59,10 @@ class Game(db.Model):
             "gamerpower_url": self.gamerpower_url,
             "open_giveaway": self.open_giveaway
         }
+    
+    def __str__(self) -> str:
+        return f"Game<id: {self.id}, title: {self.title}, worth: {self.worth}>"
+
+    def saveto_db(self) -> None:
+        db.session.add(self)
+        db.session.commit()
